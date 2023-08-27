@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #000000;
+  --background: #ffffff;
+  --selection: #79ffe1;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #ffffff;
+    --background: #000000;
+    --selection: #035049;
+  }
+} */
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+::-moz-selection {
+  background: var(--selection);
+}
+
+::selection {
+  background: var(--selection);
+}
