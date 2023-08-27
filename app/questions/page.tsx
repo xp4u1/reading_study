@@ -55,7 +55,7 @@ export default function QuestionsPage() {
 
             <div className="mt-4 space-y-4">
               {question.answers.map((answer, index) => (
-                <div className="flex items-center">
+                <div key={index} className="flex items-center">
                   <input
                     id={question.id + "-" + index}
                     name={question.id}
