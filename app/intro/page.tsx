@@ -1,11 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import FloatingNavButton from "@/components/FloatingNavButton";
 import { useState } from "react";
 
 export default function IntroPage() {
   const [consent, setConsent] = useState(false);
-  const router = useRouter();
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-center p-24">
@@ -34,11 +33,7 @@ export default function IntroPage() {
       </article>
 
       {consent && (
-        <button
-          type="button"
-          className="absolute bottom-10 right-10 inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:ring-offset-black"
-          onClick={() => router.push("/reading")}
-        >
+        <FloatingNavButton link="/reading">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -53,7 +48,7 @@ export default function IntroPage() {
               d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
             />
           </svg>
-        </button>
+        </FloatingNavButton>
       )}
     </main>
   );
