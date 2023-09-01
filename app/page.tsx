@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none" />
       </div>
@@ -11,9 +11,7 @@ export default function Home() {
         <h1 className="relative text-5xl font-bold">Prototyp</h1>
       </div>
 
-      {/* TODO: Fix this on mobile */}
-      {/* Parent layout has to have `justify-between` so this div does not need `absolute bottom-20` */}
-      <div className="absolute bottom-20 mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <Link
           href="/intro"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -82,6 +80,6 @@ export default function Home() {
           </p>
         </Link>
       </div>
-    </>
+    </main>
   );
 }

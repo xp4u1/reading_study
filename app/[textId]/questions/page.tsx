@@ -1,43 +1,14 @@
-interface Question {
-  id: string;
-  text: string;
-  answers: string[];
-}
+import { content } from "@/content/Content";
+import { notFound } from "next/navigation";
 
-const questions: Question[] = [
-  {
-    id: "hauptunterschied-empirie-theorie",
-    text: "Was ist der Hauptunterschied zwischen Empirie und Theorie?",
-    answers: [
-      "Empirie basiert auf Deduktion, während Theorie auf Beobachtung beruht.",
-      "Empirie stützt sich auf sinnliche Erfahrungen, während Theorie abstrakte Konzepte umfasst.",
-      "Empirie verwendet experimentelle Daten, während Theorie mathematische Modelle nutzt.",
-      "Empirie wird durch Induktion bestätigt, während Theorie auf Intuition basiert.",
-    ],
-  },
-  {
-    id: "wichtigste-methode-objektiv",
-    text: "Was ist eine wichtige Methode, um sicherzustellen, dass empirische Daten objektiv sind?",
-    answers: [
-      "Deduktion",
-      "Abstraktion",
-      "Systematische Beobachtung",
-      "Intuition",
-    ],
-  },
-  {
-    id: "rolle-vorhersagen",
-    text: "Welche Rolle spielen Vorhersagen in der Überprüfung von Theorien mithilfe empirischer Methoden?",
-    answers: [
-      "Vorhersagen sind in der empirischen Wissenschaft nicht relevant.",
-      "Vorhersagen werden durch Deduktion aus Theorien abgeleitet.",
-      "Vorhersagen werden durch Induktion aus Beobachtungen abgeleitet.",
-      "Vorhersagen haben keine Bedeutung für die Wissenschaftstheorie.",
-    ],
-  },
-];
+export default function QuestionsPage({
+  params,
+}: {
+  params: { textId: string };
+}) {
+  const text = content.find((text) => text.id == params.textId);
+  if (!text) notFound();
 
-export default function QuestionsPage() {
   async function submitForm(formData: FormData) {
     "use server";
 
@@ -58,7 +29,7 @@ export default function QuestionsPage() {
         Browser.
       </p>
 
-      {questions.map((question, index) => (
+      {text.questions.map((question, index) => (
         <>
           <h3>Frage {index + 1}</h3>
           <p>{question.text}</p>

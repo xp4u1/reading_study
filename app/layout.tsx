@@ -27,11 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body className={inter.className}>
-        <main className="flex min-h-screen flex-col items-center justify-center p-7 pb-32 lg:py-20 relative">
-          {children}
-        </main>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

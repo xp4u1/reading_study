@@ -1,15 +1,24 @@
-import EmpirieBionic from "@/content/empirie-bionic.mdx";
+import { notFound } from "next/navigation";
+
+import { content } from "@/content/Content";
 import FloatingNavButton from "@/components/FloatingNavButton";
 
-export default function ReadingPage() {
+export default function ReadingPage({
+  params,
+}: {
+  params: { textId: string };
+}) {
+  const text = content.find((text) => text.id == params.textId);
+  if (!text) notFound();
+
   return (
     <>
       <article className="prose prose-lg dark:prose-invert">
-        <EmpirieBionic />
+        {text.bionicComponent}
       </article>
 
       {/* <p className="absolute bottom-5 left-5 text-slate-500">00:20</p> */}
-      <FloatingNavButton link="/questions">
+      <FloatingNavButton link="./questions">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
