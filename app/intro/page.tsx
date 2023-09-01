@@ -7,7 +7,7 @@ export default function IntroPage() {
   const [consent, setConsent] = useState(false);
 
   return (
-    <main className="flex min-h-screen flex-row items-center justify-center p-24">
+    <>
       <article className="prose prose-lg dark:prose-invert">
         <h1>Willkommen</h1>
 
@@ -50,6 +50,6 @@ export default function IntroPage() {
           </svg>
         </FloatingNavButton>
       )}
-    </main>
+    </>
   );
 }

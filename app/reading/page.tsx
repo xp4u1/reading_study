@@ -3,7 +3,7 @@ import FloatingNavButton from "@/components/FloatingNavButton";
 
 export default function ReadingPage() {
   return (
-    <main className="flex min-h-screen flex-row items-center justify-center p-7 pb-32 lg:py-20 relative">
+    <>
       <article className="prose prose-lg dark:prose-invert">
         <EmpirieBionic />
       </article>
@@ -25,6 +25,6 @@ export default function ReadingPage() {
           />
         </svg>
       </FloatingNavButton>
-    </main>
+    </>
   );
 }
