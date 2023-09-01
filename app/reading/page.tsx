@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import EmpirieBionic from "../content/empirie-bionic.mdx";
+import EmpirieBionic from "@/content/empirie-bionic.mdx";
 
 export default function ReadingPage() {
   const router = useRouter();

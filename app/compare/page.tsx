@@ -1,5 +1,5 @@
-import Empirie from "../content/empirie.mdx";
-import EmpirieBionic from "../content/empirie-bionic.mdx";
+import Empirie from "@/content/empirie.mdx";
+import EmpirieBionic from "@/content/empirie-bionic.mdx";
 
 export default function Home() {
   return (
