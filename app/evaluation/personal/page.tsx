@@ -1,22 +1,36 @@
-import { notFound, redirect } from "next/navigation";
-
-import { content } from "@/content/Content";
 import FloatingSubmitButton from "@/components/FloatingSubmitButton";
+import { Question } from "@/content/Content";
 
-export default function QuestionsPage({
-  params,
-}: {
-  params: { textId: string };
-}) {
-  const text = content.find((text) => text.id == params.textId);
-  if (!text) notFound();
+const questions: Question[] = [
+  {
+    id: "freude-lesen",
+    text: "Wie gerne liest du?",
+    answers: [
+      "Nicht sehr gerne",
+      "Nicht gerne",
+      "Neutral",
+      "Gerne",
+      "Sehr gerne",
+    ],
+  },
+  {
+    id: "haeufigkeit-lesen",
+    text: "Wie oft liest du?",
+    answers: ["Nicht sehr oft", "Nicht oft", "Gelegentlich", "Oft", "Sehr oft"],
+  },
+  {
+    id: "ziel-lesen",
+    text: "Willst du an der Häufigkeit etwas ändern?",
+    answers: ["Nein", "Ich will mehr lesen", "Ich will weniger lesen"],
+  },
+];
 
+export default function PersonalPage() {
   async function submitForm(formData: FormData) {
     "use server";
 
     // TODO: handle submit
     console.debug(formData);
-    redirect("/evaluation/personal");
   }
 
   return (
@@ -25,14 +39,13 @@ export default function QuestionsPage({
       className="prose prose-lg dark:prose-invert"
       action={submitForm}
     >
-      <h2>Fragen</h2>
+      <h2>Fast fertig</h2>
       <p>
-        Versuche die Fragen zu beantworten. Falls du dir unsicher bist, kannst
-        du jederzeit zum Text zurückkehren. Nutze dafür die Pfeile in deinem
-        Browser.
+        Bitte beantworte noch diese Fragen, damit wir unsere Testgruppe besser
+        verstehen können.
       </p>
 
-      {text.questions.map((question, index) => (
+      {questions.map((question, index) => (
         <>
           <h3>Frage {index + 1}</h3>
           <p>{question.text}</p>
