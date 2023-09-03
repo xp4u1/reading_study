@@ -33,7 +33,8 @@ export default function IntroPage() {
       </article>
 
       {consent && (
-        <FloatingNavButton link="/reading">
+        // TODO: Change demo link
+        <FloatingNavButton link="/empirie/reading">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
