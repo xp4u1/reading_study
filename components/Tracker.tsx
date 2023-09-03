@@ -9,11 +9,11 @@ interface Datapoint {
 }
 
 export default function Tracker() {
-  if (typeof window === "undefined") return null;
-
   const pathname = usePathname();
   const trackingData: Datapoint[] = JSON.parse(
-    sessionStorage.getItem("tracker") || "[]"
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("tracker") || "[]"
+      : "[]"
   );
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function Tracker() {
         },
       ])
     );
-  }, [pathname]);
+  }, [pathname, trackingData]);
 
   return null;
 }
