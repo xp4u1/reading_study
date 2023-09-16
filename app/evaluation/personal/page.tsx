@@ -1,9 +1,12 @@
+import { redirect } from "next/navigation";
+
 import FloatingSubmitButton from "@/components/FloatingSubmitButton";
 import { Question } from "@/content/Content";
+import { saveForm } from "@/lib/actions";
 
 const questions: Question[] = [
   {
-    id: "freude-lesen",
+    id: "freude_lesen",
     text: "Wie gerne liest du?",
     answers: [
       "Nicht sehr gerne",
@@ -14,12 +17,12 @@ const questions: Question[] = [
     ],
   },
   {
-    id: "haeufigkeit-lesen",
+    id: "haeufigkeit_lesen",
     text: "Wie oft liest du?",
     answers: ["Nicht sehr oft", "Nicht oft", "Gelegentlich", "Oft", "Sehr oft"],
   },
   {
-    id: "ziel-lesen",
+    id: "ziel_lesen",
     text: "Willst du an der Häufigkeit etwas ändern?",
     answers: ["Nein", "Ich will mehr lesen", "Ich will weniger lesen"],
   },
@@ -29,8 +32,8 @@ export default function PersonalPage() {
   async function submitForm(formData: FormData) {
     "use server";
 
-    // TODO: handle submit
-    console.debug(formData);
+    saveForm(`evaluation_personal`, formData);
+    redirect("/thanks");
   }
 
   return (

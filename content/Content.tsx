@@ -21,7 +21,7 @@ export const content: Text[] = [
     bionicComponent: <EmpirieBionic />,
     questions: [
       {
-        id: "hauptunterschied-empirie-theorie",
+        id: "hauptunterschied_empirie_theorie",
         text: "Was ist der Hauptunterschied zwischen Empirie und Theorie?",
         answers: [
           "Empirie basiert auf Deduktion, während Theorie auf Beobachtung beruht.",
@@ -31,7 +31,7 @@ export const content: Text[] = [
         ],
       },
       {
-        id: "wichtigste-methode-objektiv",
+        id: "wichtigste_methode_objektiv",
         text: "Was ist eine wichtige Methode, um sicherzustellen, dass empirische Daten objektiv sind?",
         answers: [
           "Deduktion",
@@ -41,7 +41,7 @@ export const content: Text[] = [
         ],
       },
       {
-        id: "rolle-vorhersagen",
+        id: "rolle_vorhersagen",
         text: "Welche Rolle spielen Vorhersagen in der Überprüfung von Theorien mithilfe empirischer Methoden?",
         answers: [
           "Vorhersagen sind in der empirischen Wissenschaft nicht relevant.",

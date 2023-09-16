@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 
 import Tracker from "@/components/Tracker";
+import Guard from "@/components/Guard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
 
         <Suspense>
           <Tracker />
+          <Guard />
         </Suspense>
       </body>
     </html>

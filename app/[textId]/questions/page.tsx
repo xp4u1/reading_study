@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 
 import { content } from "@/content/Content";
 import FloatingSubmitButton from "@/components/FloatingSubmitButton";
+import { saveForm } from "@/lib/actions";
 
 export default function QuestionsPage({
   params,
@@ -14,8 +15,7 @@ export default function QuestionsPage({
   async function submitForm(formData: FormData) {
     "use server";
 
-    // TODO: handle submit
-    console.debug(formData);
+    saveForm(`questions_${params.textId}`, formData);
     redirect("/evaluation/personal");
   }
 
