@@ -1,5 +1,6 @@
 "use client";
 
+import Fingerprint from "@/components/Fingerprint";
 import FloatingNavButton from "@/components/FloatingNavButton";
 import { useState } from "react";
 
@@ -8,6 +9,8 @@ export default function IntroPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-7 pb-32 lg:py-20 relative">
+      <Fingerprint />
+
       <article className="prose prose-lg dark:prose-invert">
         <h1>Willkommen</h1>
 
