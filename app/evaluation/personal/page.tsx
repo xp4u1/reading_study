@@ -58,6 +58,7 @@ export default function PersonalPage() {
                   name={question.id}
                   value={index}
                   type="radio"
+                  required
                   className="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300"
                 />
                 <label
