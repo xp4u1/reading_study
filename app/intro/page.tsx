@@ -1,16 +1,15 @@
 "use client";
 
-import Fingerprint from "@/components/Fingerprint";
-import FloatingNavButton from "@/components/FloatingNavButton";
 import { useState } from "react";
+
+import FloatingActionButton from "@/components/FloatingActionButton";
+import { createUser } from "@/lib/actions";
 
 export default function IntroPage() {
   const [consent, setConsent] = useState(false);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-7 pb-32 lg:py-20 relative">
-      <Fingerprint />
-
       <article className="prose prose-lg dark:prose-invert">
         <h1>Willkommen</h1>
 
@@ -36,8 +35,7 @@ export default function IntroPage() {
       </article>
 
       {consent && (
-        // TODO: Change demo link
-        <FloatingNavButton link="/empirie/reading">
+        <FloatingActionButton callback={createUser}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -52,7 +50,7 @@ export default function IntroPage() {
               d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
             />
           </svg>
-        </FloatingNavButton>
+        </FloatingActionButton>
       )}
     </main>
   );

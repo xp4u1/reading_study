@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { sql } from "@/lib/database";
+import { content } from "@/content/Content";
 
 export async function createUUID() {
   if (!cookies().get("userId")) {
@@ -41,4 +42,35 @@ export async function saveForm(formId: string, formData: FormData) {
         where user_id = ${userId}
       `;
     });
+}
+
+export async function createUser() {
+  "use server";
+
+  const userId = cookies().get("userId")?.value!;
+  const fingerprint = cookies().get("fingerprint")?.value!;
+
+  const [{ test: test_group, control: control_group }]: [
+    { test: number; control: number }
+  ] = await sql`
+    SELECT 
+        SUM(CASE WHEN test = true THEN 1 ELSE 0 END) AS test,
+        SUM(CASE WHEN test = false THEN 1 ELSE 0 END) AS control
+    FROM users;
+  `;
+
+  // Try to keep both groups equal in size.
+  // If there are equal numbers, the test group is assigned.
+  let test = true;
+  if (test_group > control_group) test = false;
+
+  if (test) cookies().set("testGroup", "true");
+
+  await sql`
+    insert into users (id, fingerprint, test)
+    values (${userId}, ${fingerprint}, ${test})
+  `;
+
+  // TODO: Dynamic Redirect
+  redirect(`/${content[0].id}/reading`);
 }
