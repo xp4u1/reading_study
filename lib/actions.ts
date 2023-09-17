@@ -45,8 +45,6 @@ export async function saveForm(formId: string, formData: FormData) {
 }
 
 export async function createUser() {
-  "use server";
-
   const userId = cookies().get("userId")?.value!;
   const fingerprint = cookies().get("fingerprint")?.value!;
 
