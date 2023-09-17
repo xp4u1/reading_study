@@ -72,3 +72,24 @@ export async function createUser() {
   // TODO: Dynamic Redirect
   redirect(`/${content[0].id}/reading`);
 }
+
+export async function uploadTrackingData(trackingData: string) {
+  if (!cookies().has("userId")) redirect("/intro");
+  const userId = cookies().get("userId")?.value!;
+
+  const data = {
+    user_id: userId,
+    data: trackingData,
+  };
+
+  await sql`
+    insert into tracking ${sql(data)}
+  `
+    // Update if insert fails.
+    .catch(async () => {
+      await sql`
+        update tracking set ${sql(data)}
+        where user_id = ${userId}
+      `;
+    });
+}
