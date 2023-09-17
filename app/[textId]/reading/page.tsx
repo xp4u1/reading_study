@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { content } from "@/content/Content";
 import FloatingNavButton from "@/components/FloatingNavButton";
+import { cookies } from "next/headers";
 
 export default function ReadingPage({
   params,
@@ -11,10 +12,13 @@ export default function ReadingPage({
   const text = content.find((text) => text.id == params.textId);
   if (!text) notFound();
 
+  const bionicReading = cookies().has("testGroup");
+
   return (
     <>
       <article className="prose prose-lg dark:prose-invert">
-        {text.bionicComponent}
+        {bionicReading && text.bionicComponent}
+        {!bionicReading && text.component}
       </article>
 
       {/* <p className="absolute bottom-5 left-5 text-slate-500">00:20</p> */}
