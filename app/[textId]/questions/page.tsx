@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { content } from "@/content/Content";
 import FloatingSubmitButton from "@/components/FloatingSubmitButton";
 import { saveForm } from "@/lib/actions";
+import { cookies } from "next/headers";
 
 export default function QuestionsPage({
   params,
@@ -16,7 +17,10 @@ export default function QuestionsPage({
     "use server";
 
     saveForm(`questions_${params.textId}`, formData);
-    redirect("/evaluation/personal");
+
+    redirect(
+      cookies().has("testGroup") ? "/evaluation/bionic" : "/evaluation/personal"
+    );
   }
 
   return (

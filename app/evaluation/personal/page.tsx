@@ -6,6 +6,11 @@ import { saveForm } from "@/lib/actions";
 
 const questions: Question[] = [
   {
+    id: "textverstaendnis",
+    text: "Schwierige oder lange Texte zu verstehen ist für dich ...",
+    answers: ["Leicht", "Eher leicht", "Ok", "Eher schwer", "Schwer"],
+  },
+  {
     id: "freude_lesen",
     text: "Wie gerne liest du?",
     answers: [
