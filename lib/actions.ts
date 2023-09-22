@@ -67,7 +67,12 @@ export async function createUser() {
   await sql`
     insert into users (id, fingerprint, test)
     values (${userId}, ${fingerprint}, ${test})
-  `;
+  `.catch(async () => {
+    await sql`
+      update users set fingerprint=${fingerprint}
+      where id = ${userId}
+    `;
+  });
 
   // TODO: Dynamic Redirect
   redirect(`/${content[0].id}/reading`);
