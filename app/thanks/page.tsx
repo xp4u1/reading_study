@@ -7,7 +7,9 @@ export default function Thanks() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    uploadTrackingData(localStorage.getItem("tracker")!);
+    if (!localStorage.getItem("done"))
+      uploadTrackingData(localStorage.getItem("tracker")!);
+
     localStorage.setItem("done", "true");
   }, []);
 

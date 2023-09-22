@@ -89,12 +89,5 @@ export async function uploadTrackingData(trackingData: string) {
 
   await sql`
     insert into tracking ${sql(data)}
-  `
-    // Update if insert fails.
-    .catch(async () => {
-      await sql`
-        update tracking set ${sql(data)}
-        where user_id = ${userId}
-      `;
-    });
+  `;
 }
