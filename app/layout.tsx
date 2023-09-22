@@ -9,8 +9,8 @@ import Guard from "@/components/Guard";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Prototyp",
-  description: "Prototyp für UI/UX",
+  title: "Studie: Leseverstehen",
+  description: "Empirische Studie zum Leseverstehen",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
