@@ -81,6 +81,16 @@ export default function PersonalPage() {
         </>
       ))}
 
+      <h3>Freiwillige Angabe</h3>
+      <p>Du kannst dein Alter mit uns teilen, musst aber nicht.</p>
+
+      <input
+        id="alter"
+        name="alter"
+        type="number"
+        className="form-input w-full max-w-xs focus:border-primary-500 focus:ring-primary-500 border-gray-300"
+      />
+
       <FloatingSubmitButton />
     </form>
   );
