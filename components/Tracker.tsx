@@ -12,12 +12,12 @@ export default function Tracker() {
   const pathname = usePathname();
   const trackingData: Datapoint[] = JSON.parse(
     typeof window !== "undefined"
-      ? sessionStorage.getItem("tracker") || "[]"
+      ? localStorage.getItem("tracker") || "[]"
       : "[]"
   );
 
   useEffect(() => {
-    sessionStorage.setItem(
+    localStorage.setItem(
       "tracker",
       JSON.stringify([
         ...trackingData,
