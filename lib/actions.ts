@@ -47,35 +47,41 @@ export async function saveForm(formId: string, formData: FormData) {
 export async function createUser() {
   const userId = cookies().get("userId")?.value!;
   const fingerprint = cookies().get("fingerprint")?.value!;
+  let allowNextStep = false;
 
-  const [{ test: test_group, control: control_group }]: [
-    { test: number; control: number }
-  ] = await sql`
-    SELECT 
-        SUM(CASE WHEN test = true THEN 1 ELSE 0 END) AS test,
-        SUM(CASE WHEN test = false THEN 1 ELSE 0 END) AS control
-    FROM users;
-  `;
-
-  // Try to keep both groups equal in size.
-  // If there are equal numbers, the test group is assigned.
-  let test = true;
-  if (test_group > control_group) test = false;
-
-  if (test) cookies().set("testGroup", "true");
-
-  await sql`
-    insert into users (id, fingerprint, test)
-    values (${userId}, ${fingerprint}, ${test})
-  `.catch(async () => {
-    await sql`
-      update users set fingerprint=${fingerprint}
-      where id = ${userId}
+  try {
+    const [{ test: test_group_member }] = await sql`
+      INSERT INTO users (id, fingerprint, test)
+      VALUES (${userId}, ${fingerprint},
+          (SELECT
+              CASE
+                  WHEN (
+                      SELECT COUNT(*) FROM users WHERE test = true
+                  ) > (
+                      SELECT COUNT(*) FROM users WHERE test = false
+                  ) THEN false
+                  ELSE true
+              END
+          )
+      )
+      RETURNING test;
     `;
-  });
+
+    if (test_group_member) cookies().set("testGroup", "true");
+
+    allowNextStep = true;
+  } catch (error) {
+    // If inserting fails, try updating.
+    await sql`
+      UPDATE users SET fingerprint=${fingerprint}
+      WHERE id = ${userId}
+    `;
+
+    allowNextStep = true;
+  }
 
   // TODO: Dynamic Redirect
-  redirect(`/${content[0].id}/reading`);
+  if (allowNextStep) redirect(`/${content[0].id}/reading`);
 }
 
 export async function uploadTrackingData(trackingData: string) {
