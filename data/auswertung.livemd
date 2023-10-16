@@ -1,0 +1,51 @@
+# Seminarfach Auswertung
+
+```elixir
+Mix.install([
+  {:explorer, "~> 0.7.1"},
+  {:kino_explorer, "~> 0.1.11"},
+  {:kino_db, "~> 0.2.4"},
+  {:postgrex, "~> 0.17.3"}
+])
+```
+
+## Initialisierung und Datenimport
+
+Für die Verbindung zur Supabase-Datenbank muss das Passwort in den Livebook-Secrets als `SUPABASE_PASSWORD` hinterlegt werden.
+
+<!-- livebook:{"attrs":{"database":"postgres","hostname":"db.jatklaoradygtxkxlfwh.supabase.co","password_secret":"SUPABASE_PASSWORD","port":5432,"type":"postgres","use_ipv6":false,"use_ssl":false,"username":"postgres","variable":"conn"},"chunks":null,"kind":"Elixir.KinoDB.ConnectionCell","livebook_object":"smart_cell"} -->
+
+```elixir
+opts = [
+  hostname: "db.jatklaoradygtxkxlfwh.supabase.co",
+  port: 5432,
+  username: "postgres",
+  password: System.fetch_env!("LB_SUPABASE_PASSWORD"),
+  database: "postgres"
+]
+
+{:ok, conn} = Kino.start_child({Postgrex, opts})
+```
+
+```elixir
+alias Explorer.DataFrame, as: DF
+require Explorer.DataFrame
+```
+
+Alle Einträge mit dem Datentyp `uuid` können nicht von Livebook eingelesen werden. Deshalb muss man sie vorher zu `text` umwandeln.
+
+<!-- livebook:{"attrs":{"cache_query":true,"connection":{"type":"postgres","variable":"conn"},"data_frame_alias":"Elixir.DF","query":"select id::text, fingerprint, test from users","result_variable":"users_table","timeout":null},"chunks":null,"kind":"Elixir.KinoDB.SQLCell","livebook_object":"smart_cell"} -->
+
+```elixir
+users_table = Postgrex.query!(conn, "select id::text, fingerprint, test from users", [])
+```
+
+## Tracking Daten
+
+Die Tracking Daten können mit dem Go-Tool aus dem `data/tracking` Verzeichnis erzeugt werden. Der Output des Programms muss sich für die Auswertung in `data/export/tracking.csv` befinden.
+
+```elixir
+tracking_data = DF.from_csv!("./export/tracking.csv")
+```
+
+<!-- livebook:{"offset":1808,"stamp":{"token":"XCP.T7v7Zuzsj2cAP9Oyvq3ZlumE16iaE1c52v2E4dw0FAzPwF7YfNVKqcy0izNRoUojnuLM1-uqXbVAY5Eb219RoSqoWL4FWQnOEHzwWphItoWZO_qMdMHRa24CC78","version":2}} -->
