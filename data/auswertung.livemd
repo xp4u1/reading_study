@@ -34,10 +34,83 @@ require Explorer.DataFrame
 
 Alle Einträge mit dem Datentyp `uuid` können nicht von Livebook eingelesen werden. Deshalb muss man sie vorher zu `text` umwandeln.
 
-<!-- livebook:{"attrs":{"cache_query":true,"connection":{"type":"postgres","variable":"conn"},"data_frame_alias":"Elixir.DF","query":"select id::text, fingerprint, test from users","result_variable":"users_table","timeout":null},"chunks":null,"kind":"Elixir.KinoDB.SQLCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":{"cache_query":true,"connection":{"type":"postgres","variable":"conn"},"data_frame_alias":"Elixir.DF","query":"select\n  users.id::text,\n  users.fingerprint,\n  users.test,\n  questions_lehrerin.gefuehle_beruf as fragen_gefuehle_beruf,\n  questions_lehrerin.warum_lehrer as fragen_warum_lehrer,\n  questions_lehrerin.oeffentlichkeit_meinung as fragen_oeffentlichkeit_meinung,\n  questions_lehrerin.vorwurf_eltern as fragen_vorwurf_eltern,\n  questions_lehrerin.internet as fragen_internet,\n  evaluation_bionic.schneller as bionic_schneller,\n  evaluation_bionic.leichter as bionic_leichter,\n  evaluation_bionic.textverstaendnis as bionic_textverstaendnis,\n  evaluation_bionic.woerter_finden as bionic_woerter_finden,\n  evaluation_bionic.mehr_texte as bionic_mehr_texte,\n  evaluation_bionic.in_schule as bionic_in_schule,\n  evaluation_bionic.anmerkungen as bionic_anmerkungen,\n  evaluation_personal.freude_lesen as persoenlich_freude_lesen,\n  evaluation_personal.haeufigkeit_lesen as persoenlich_haeufigkeit_lesen,\n  evaluation_personal.ziel_lesen as persoenlich_ziel_lesen,\n  evaluation_personal.textverstaendnis as persoenlich_textverstaendnis,\n  evaluation_personal.alter as persoenlich_alter\nfrom\n  users\n  full join evaluation_bionic on users.id = evaluation_bionic.user_id\n  full join evaluation_personal on users.id = evaluation_personal.user_id\n  full join questions_lehrerin on users.id = questions_lehrerin.user_id\n","result_variable":"postgres_data","timeout":null},"chunks":null,"kind":"Elixir.KinoDB.SQLCell","livebook_object":"smart_cell"} -->
 
 ```elixir
-users_table = Postgrex.query!(conn, "select id::text, fingerprint, test from users", [])
+postgres_data =
+  Postgrex.query!(
+    conn,
+    """
+    select
+      users.id::text,
+      users.fingerprint,
+      users.test,
+      questions_lehrerin.gefuehle_beruf as fragen_gefuehle_beruf,
+      questions_lehrerin.warum_lehrer as fragen_warum_lehrer,
+      questions_lehrerin.oeffentlichkeit_meinung as fragen_oeffentlichkeit_meinung,
+      questions_lehrerin.vorwurf_eltern as fragen_vorwurf_eltern,
+      questions_lehrerin.internet as fragen_internet,
+      evaluation_bionic.schneller as bionic_schneller,
+      evaluation_bionic.leichter as bionic_leichter,
+      evaluation_bionic.textverstaendnis as bionic_textverstaendnis,
+      evaluation_bionic.woerter_finden as bionic_woerter_finden,
+      evaluation_bionic.mehr_texte as bionic_mehr_texte,
+      evaluation_bionic.in_schule as bionic_in_schule,
+      evaluation_bionic.anmerkungen as bionic_anmerkungen,
+      evaluation_personal.freude_lesen as persoenlich_freude_lesen,
+      evaluation_personal.haeufigkeit_lesen as persoenlich_haeufigkeit_lesen,
+      evaluation_personal.ziel_lesen as persoenlich_ziel_lesen,
+      evaluation_personal.textverstaendnis as persoenlich_textverstaendnis,
+      evaluation_personal.alter as persoenlich_alter
+    from
+      users
+      full join evaluation_bionic on users.id = evaluation_bionic.user_id
+      full join evaluation_personal on users.id = evaluation_personal.user_id
+      full join questions_lehrerin on users.id = questions_lehrerin.user_id
+
+    """,
+    []
+  )
+```
+
+## Doppelte Einträge entfernen
+
+Doppelte Einträge finden:
+
+```elixir
+duplicate_uuids =
+  postgres_data.rows
+  |> Enum.frequencies_by(fn entry ->
+    Enum.at(entry, 0)
+  end)
+  |> Map.reject(fn {_key, value} -> value == 1 end)
+  |> Map.keys()
+```
+
+Es ist nicht schlimm, wenn doppelte Einträge gelöscht werden. Aber hier sind alle Einträge mit gleicher `user_id`, die unterschiedliche Daten enthalten:
+
+```elixir
+duplicate_uuids
+|> Enum.map(fn uuid ->
+  postgres_data.rows
+  |> Enum.filter(&(Enum.at(&1, 0) == uuid))
+end)
+|> Enum.map(&Enum.uniq/1)
+|> Enum.filter(&(Enum.count(&1) != 1))
+```
+
+Es werden alle doppelten Einträge mit `Enum.uniq_by` anhand ihrer `user_id` gelöscht.
+
+```elixir
+rows = Enum.uniq_by(postgres_data.rows, &Enum.at(&1, 0))
+
+data =
+  %Postgrex.Result{
+    columns: postgres_data.columns,
+    rows: rows,
+    num_rows: Enum.count(rows)
+  }
+  |> DF.new()
 ```
 
 ## Tracking Daten
@@ -48,4 +121,4 @@ Die Tracking Daten können mit dem Go-Tool aus dem `data/tracking` Verzeichnis e
 tracking_data = DF.from_csv!("./export/tracking.csv")
 ```
 
-<!-- livebook:{"offset":1808,"stamp":{"token":"XCP.T7v7Zuzsj2cAP9Oyvq3ZlumE16iaE1c52v2E4dw0FAzPwF7YfNVKqcy0izNRoUojnuLM1-uqXbVAY5Eb219RoSqoWL4FWQnOEHzwWphItoWZO_qMdMHRa24CC78","version":2}} -->
+<!-- livebook:{"offset":5375,"stamp":{"token":"XCP.NIcN03Lh5KdmBEilRUa-6i5NZhX_B6_EE9_33aHD5clZ8WUCa_EjoIQmPO-Z-6ICPdQee5ClzIk-TCwtSGDoegYszZ0J_shcBt_T1dqsfniIbGiFCMR96qycdyY","version":2}} -->
