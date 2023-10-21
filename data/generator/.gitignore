@@ -4,7 +4,7 @@
 *.dll
 *.so
 *.dylib
-tracking
+generator
 
 # Test binary, built with `go test -c`
 *.test
@@ -15,5 +15,5 @@ tracking
 # Go workspace file
 go.work
 
-# Input/Output files
+# Output files
 *.csv
