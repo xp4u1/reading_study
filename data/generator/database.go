@@ -139,9 +139,9 @@ func download_data() {
 
 		// Header?
 		if i == 0 {
-			newRow = append(newRow, "readingCount")
-			newRow = append(newRow, "readingDuration")
-			newRow = append(newRow, "questionsDuration")
+			newRow = append(newRow, "reading_count")
+			newRow = append(newRow, "reading_duration")
+			newRow = append(newRow, "questions_duration")
 		} else {
 			// Parse json data.
 			trackingData := readTrackingData([]byte(json))
