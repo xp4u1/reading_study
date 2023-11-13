@@ -1,0 +1,13 @@
+{
+  "name": "interactive-plots",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.2",
+    "posthtml-doctype": "^1.1.1",
+    "posthtml-include": "^1.7.4"
+  }
+}
