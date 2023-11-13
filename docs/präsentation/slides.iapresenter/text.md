@@ -17,6 +17,10 @@ Einführung: Was ist Bionic Reading?
 
 # Studie
 
+Einmal kurz zusammengefasst für alle, die nicht an der kleinen empirischen Studie teilgenommen haben: Wir haben eine Online-Plattform entwickelt, bei der man erst einen Text bekommt und danach einen Fragebogen ausfüllt.
+
+Die Teilnehmer mussten Fragen zum Text und ein paar persönliche Fragen beantworten. Die Personen aus der Testgruppe hatten zusätzlich noch ein paar Fragen, wie es ihnen mit Bionic Reading ergangen ist.
+
 Unser Text ist die Hälfte des Leseverstehen-Textes aus dem Goethe-Zertifikat für Deutsch.
 
 Das ist das Äquivalent zum Cambridge-Zertifikat für Englisch. Wir haben das höchste Sprachniveau, C2, ausgewählt. Das sollte aber für Muttersprachler durchaus machbar sein.
@@ -32,9 +36,9 @@ Deshalb hatten wir uns dann für den C2-Text aus dem Übungsmaterial für das Ze
 /assets/groups-bar.png
 size: contain
 
-Alle Teilnehmer wurden in zwei Gruppen aufgeteilt. Es gibt die Test- und die Kontrollgruppe. Nur diejenigen, die in der Testgruppe waren, haben den speziell formatierten Text bekommen.
+Alle Teilnehmer wurden in zwei Gruppen aufgeteilt. Es gibt die Test- und die Kontrollgruppe. Nur diejenigen, die in der Testgruppe waren, haben den speziell formatierten Text mit Bionic Reading bekommen.
 
-Eigentlich teilt das System die Teilnehmer automatisch zu. Sie werden so verteilt, dass die Gruppen immer gleich groß sind. Das Problem ist, dass aus den über 80 Einträgen in der Datenbank nur knapp 70 benutzen konnten. Es gab Personen, die den Test nicht beendet haben oder welche, deren Ergebnisse wir nicht verwenden konnten.
+Eigentlich teilt das System die Teilnehmer automatisch zu. Sie werden so verteilt, dass die Gruppen immer gleich groß sind. Das Problem ist, dass wir aus den über 80 Einträgen in der Datenbank nur knapp 70 benutzen konnten. Es gab Personen, die den Test nicht beendet haben oder welche, deren Ergebnisse wir aus anderen Gründen nicht verwenden konnten.
 
 Das ist ein Problem bei den jüngeren Schülern gewesen, weshalb die Testgruppe bei den 12- und 13-Jährigen nicht gleich groß sind. Das kann die Ergebnisse ein wenig verzerrt haben.
 
@@ -56,6 +60,8 @@ size: contain
 
 Man sieht in den Daten nicht direkt einen Trend, ob die Personen mit Bionic Reading aus der Testgruppe wirklich schneller waren.
 
+Dann müssten die Säulen auf der linken Seite überwiegend grün sein. Beim Beantworten der Fragen sieht man aber schon einen kleinen Trend in Richtung Bionic Reading.
+
 ---
 
 ### Streuung
@@ -66,6 +72,8 @@ size: contain
 
 Hier kann man die Streuung im Datensatz besser erkennen. Es gibt vereinzelt Ausreißer.
 
+Die meisten Werte liegen jedoch im Bereich von 200 bis 300 Sekunden. Das war auch bei der Länge des Textes zu erwarten.
+
 ---
 
 /assets/reading-questions-scatter.png
@@ -75,7 +83,7 @@ Interessant ist, wenn man die Lesezeit nach rechts und die Zeit zum Fragen beant
 
 Es ist ein Trend zu erkennen: Diejenigen, die den Text schnell lesen, beantworten auch die Fragen schnell. Man erkennt *hier* zwei Personen, die den Text zwar schnell gelesen haben, aber doch recht lange zum Beantworten der Fragen gebraucht haben.
 
-Eine Vermutung, die man aufstellen könnte, wäre, dass die Teilnehmer mit Bionic Reading zwar schnell den Text lesen, aber öfter hin und her wechseln, da sie den Text schnell gelesen, jedoch nicht verstanden haben.
+Eine Vermutung, die wir am Anfang aufgestellt hatten, war, dass die Teilnehmer mit Bionic Reading zwar schnell den Text lesen, aber öfter hin und her wechseln, da sie den Text schnell gelesen, jedoch nicht verstanden haben.
 
 Diese Vermutung lässt sich nicht bestätigen. Dann müssten die grünen Punkte in Bereich links unten alle größer sein. 
 
@@ -207,3 +215,10 @@ size: contain
 Bionic Reading verspricht mehr als es tatsächlich nützt. Versprechungen wie "Doppelt so schnell lesen" konnten wir nicht einmal annähernd in unseren Daten erkennen.
 
 Es ist zum Schluss eine persönliche Präferenz, ob man Bionic Reading gut oder schlecht findet. Aber bei monatlich 2 € für die Grundvariante und 8 € für die Premiumvariante sollte jeder überlegen, ob er blind den Versprechungen von der Website glaubt.
+
+---
+
+## Neugierig?
+	https://live.protoly.se
+
+/assets/qr.png
