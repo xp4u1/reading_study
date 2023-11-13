@@ -16,6 +16,11 @@ $ pip install pyautogui pyjoystick
 
 # Skripts ausführen
 $ python3 joycon.py
+
+# Spezielle Joycon-Konfiguration laden
+$ python3 joycon.py right
+$ python3 joycon.py left
+$ python3 joycon.py both
 ```
 
 Es kann sein dass `SDL2` separat installiert werden muss.
